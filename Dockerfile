@@ -34,11 +34,8 @@ RUN adduser --system --uid 1001 nextjs
 
 # 复制必要的文件
 COPY --from=builder /app/public ./public
-COPY --from=builder /app/.next/standalone ./
-COPY --from=builder /app/.next/static ./.next/static
-
-# 设置权限
-RUN chown -R nextjs:nodejs /app
+COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
+COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
 
 USER nextjs
 
@@ -49,5 +46,5 @@ ENV PORT 3000
 ENV HOSTNAME "0.0.0.0"
 
 # 使用shell形式以确保PORT环境变量正确扩展
-CMD sh -c "PORT=${PORT:-3000} node server.js"
+CMD sh -c "node server.js"
 
