@@ -1,0 +1,8 @@
+{
+  "repo_url": "https://github.com/ash-Zhang/fake_chatgpt",
+  "service_name": "fake-chatgpt",
+  "branch": "main",
+  "port": 3000,
+  "env_vars": {}
+}
+
