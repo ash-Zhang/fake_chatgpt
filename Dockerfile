@@ -23,5 +23,5 @@ ENV NODE_ENV=production
 EXPOSE 3000
 
 # 使用shell形式以确保PORT环境变量正确扩展
-CMD sh -c "npm start -- -p ${PORT:-3000}"
+CMD sh -c "npx next start -p ${PORT:-3000}"
 
