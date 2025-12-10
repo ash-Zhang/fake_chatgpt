@@ -16,7 +16,7 @@ COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 
 # 禁用telemetry以加快构建速度
-ENV NEXT_TELEMETRY_DISABLED 1
+ENV NEXT_TELEMETRY_DISABLED=1
 
 # 构建Next.js应用
 RUN npm run build
@@ -44,5 +44,6 @@ USER nextjs
 EXPOSE 3000
 
 # 使用shell形式以确保PORT环境变量正确扩展
-CMD sh -c "PORT=${PORT:-3000} node server.js"
+# standalone模式下，server.js在根目录或app目录中
+CMD sh -c "PORT=${PORT:-3000} node server.js || node app/server.js"
 
