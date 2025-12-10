@@ -46,5 +46,5 @@ ENV PORT 3000
 ENV HOSTNAME "0.0.0.0"
 
 # 使用shell形式以确保PORT环境变量正确扩展
-CMD sh -c "node server.js"
+CMD sh -c "PORT=${PORT:-3000} node server.js"
 
