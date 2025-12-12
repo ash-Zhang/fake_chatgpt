@@ -20,8 +20,8 @@ RUN npm run build
 ENV NODE_ENV=production
 
 # 暴露端口
-EXPOSE 3000
+EXPOSE 8000
 
 # 使用shell形式以确保PORT环境变量正确扩展
-CMD sh -c "npx next start -p ${PORT:-3000}"
+CMD sh -c "npx next start -p ${PORT:-8000}"
 
