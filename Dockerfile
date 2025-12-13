@@ -23,5 +23,6 @@ ENV NODE_ENV=production
 EXPOSE 8000
 
 # 使用shell形式以确保PORT环境变量正确扩展
-CMD sh -c "npx next start -p ${PORT:-8000}"
+# Next.js需要监听0.0.0.0以允许外部访问
+CMD sh -c "npx next start -H 0.0.0.0 -p ${PORT:-8000}"
 
