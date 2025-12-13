@@ -3,19 +3,22 @@ FROM node:20-alpine
 
 WORKDIR /app
 
-# 设置环境变量（在构建前设置）
-ENV NODE_ENV=production
+# 禁用telemetry以加快构建速度
 ENV NEXT_TELEMETRY_DISABLED=1
 
 # 复制package文件并安装依赖（包括devDependencies用于构建）
+# 注意：不设置NODE_ENV=production，这样npm ci会安装devDependencies
 COPY package.json package-lock.json* ./
 RUN npm ci
 
 # 复制应用程序代码
 COPY . .
 
-# 构建Next.js应用
+# 构建Next.js应用（此时仍需要devDependencies）
 RUN npm run build
+
+# 设置生产环境（构建完成后设置）
+ENV NODE_ENV=production
 
 # 暴露端口
 EXPOSE 8000
